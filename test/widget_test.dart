@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get/get.dart';
 
 import 'package:local_marketblace/main.dart';
 
@@ -16,5 +15,14 @@ void main() {
 
     expect(find.text('0'), findsNothing);
     expect(find.text('1'), findsOneWidget);
+  });
+
+  testWidgets('App uses configured theme', (WidgetTester tester) async {
+    await tester.pumpWidget(const MyApp());
+
+    // Verify the app is using Material 3
+    final materialApp = tester.widget<MaterialApp>(find.byType(MaterialApp));
+    expect(materialApp.theme?.useMaterial3, true);
+    expect(materialApp.darkTheme?.useMaterial3, true);
   });
 }
