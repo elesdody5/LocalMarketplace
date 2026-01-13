@@ -71,7 +71,7 @@ class AppTheme {
         foregroundColor: Colors.white,
         systemOverlayStyle: SystemUiOverlayStyle.light,
         titleTextStyle: AppTextStyles.titleLarge.copyWith(
-          color: Colors.white,
+          color: Colors.white
         ),
         iconTheme: const IconThemeData(color: Colors.white),
       ),
@@ -94,9 +94,7 @@ class AppTheme {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
           ),
-          textStyle: AppTextStyles.labelLarge.copyWith(
-            
-          ),
+          textStyle: AppTextStyles.labelLarge,
         ),
       ),
 
@@ -108,9 +106,7 @@ class AppTheme {
             borderRadius: BorderRadius.circular(8),
           ),
           side: const BorderSide(color: AppColors.primaryGreen, width: 1.5),
-          textStyle: AppTextStyles.labelLarge.copyWith(
-            
-          ),
+          textStyle: AppTextStyles.labelLarge,
         ),
       ),
 
@@ -118,9 +114,7 @@ class AppTheme {
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          textStyle: AppTextStyles.labelLarge.copyWith(
-            
-          ),
+          textStyle: AppTextStyles.labelLarge,
         ),
       ),
 
@@ -147,11 +141,9 @@ class AppTheme {
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         labelStyle: AppTextStyles.bodyMedium.copyWith(
           color: AppColors.textSecondaryLight,
-          
         ),
         hintStyle: AppTextStyles.bodyMedium.copyWith(
           color: AppColors.textSecondaryLight,
-          
         ),
       ),
 
@@ -159,9 +151,7 @@ class AppTheme {
       chipTheme: ChipThemeData(
         backgroundColor: AppColors.surfaceLight,
         selectedColor: AppColors.primaryGreenLight,
-        labelStyle: AppTextStyles.labelMedium.copyWith(
-          
-        ),
+        labelStyle: AppTextStyles.labelMedium,
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
@@ -172,13 +162,13 @@ class AppTheme {
       dividerTheme: const DividerThemeData(
         color: AppColors.dividerLight,
         thickness: 1,
-        space: 1,
+        space: 1
       ),
 
       // Icon theme
       iconTheme: const IconThemeData(
         color: AppColors.textPrimaryLight,
-        size: 24,
+        size: 24
       ),
 
       // Floating action button theme
@@ -195,12 +185,8 @@ class AppTheme {
         unselectedItemColor: AppColors.textSecondaryLight,
         type: BottomNavigationBarType.fixed,
         elevation: 8,
-        selectedLabelStyle: AppTextStyles.labelSmall.copyWith(
-          
-        ),
-        unselectedLabelStyle: AppTextStyles.labelSmall.copyWith(
-          
-        ),
+        selectedLabelStyle: AppTextStyles.labelSmall,
+        unselectedLabelStyle: AppTextStyles.labelSmall,
       ),
 
       // Dialog theme
@@ -224,7 +210,7 @@ class AppTheme {
       snackBarTheme: SnackBarThemeData(
         backgroundColor: AppColors.textPrimaryLight,
         contentTextStyle: AppTextStyles.bodyMedium.copyWith(
-          color: Colors.white,
+          color: Colors.white
           
         ),
         shape: RoundedRectangleBorder(
@@ -297,9 +283,7 @@ class AppTheme {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
           ),
-          textStyle: AppTextStyles.labelLarge.copyWith(
-            
-          ),
+          textStyle: AppTextStyles.labelLarge,
         ),
       ),
 
@@ -311,9 +295,7 @@ class AppTheme {
             borderRadius: BorderRadius.circular(8),
           ),
           side: const BorderSide(color: AppColors.primaryGreenLight, width: 1.5),
-          textStyle: AppTextStyles.labelLarge.copyWith(
-            
-          ),
+          textStyle: AppTextStyles.labelLarge,
         ),
       ),
 
@@ -321,9 +303,7 @@ class AppTheme {
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          textStyle: AppTextStyles.labelLarge.copyWith(
-            
-          ),
+          textStyle: AppTextStyles.labelLarge,
         ),
       ),
 
@@ -362,9 +342,7 @@ class AppTheme {
       chipTheme: ChipThemeData(
         backgroundColor: AppColors.surfaceDark,
         selectedColor: AppColors.primaryGreenDark,
-        labelStyle: AppTextStyles.labelMedium.copyWith(
-          
-        ),
+        labelStyle: AppTextStyles.labelMedium,
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
@@ -375,13 +353,13 @@ class AppTheme {
       dividerTheme: const DividerThemeData(
         color: AppColors.dividerDark,
         thickness: 1,
-        space: 1,
+        space: 1
       ),
 
       // Icon theme
       iconTheme: const IconThemeData(
         color: AppColors.textPrimaryDark,
-        size: 24,
+        size: 24
       ),
 
       // Floating action button theme
@@ -398,12 +376,8 @@ class AppTheme {
         unselectedItemColor: AppColors.textSecondaryDark,
         type: BottomNavigationBarType.fixed,
         elevation: 8,
-        selectedLabelStyle: AppTextStyles.labelSmall.copyWith(
-          
-        ),
-        unselectedLabelStyle: AppTextStyles.labelSmall.copyWith(
-          
-        ),
+        selectedLabelStyle: AppTextStyles.labelSmall,
+        unselectedLabelStyle: AppTextStyles.labelSmall,
       ),
 
       // Dialog theme
