@@ -124,6 +124,10 @@ class ThemeDemo extends StatelessWidget {
   }
 
   Widget _colorBox(String label, Color color) {
+    // Calculate contrasting text color based on background brightness
+    final brightness = ThemeData.estimateBrightnessForColor(color);
+    final textColor = brightness == Brightness.dark ? Colors.white : Colors.black;
+    
     return Container(
       height: 60,
       decoration: BoxDecoration(
@@ -133,8 +137,8 @@ class ThemeDemo extends StatelessWidget {
       child: Center(
         child: Text(
           label,
-          style: const TextStyle(
-            color: Colors.white,
+          style: TextStyle(
+            color: textColor,
             fontWeight: FontWeight.bold,
           ),
         ),

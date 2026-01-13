@@ -198,11 +198,9 @@ class AppTheme {
         backgroundColor: AppColors.surfaceLight,
         titleTextStyle: AppTextStyles.titleLarge.copyWith(
           color: AppColors.textPrimaryLight,
-          
         ),
         contentTextStyle: AppTextStyles.bodyMedium.copyWith(
           color: AppColors.textPrimaryLight,
-          
         ),
       ),
 
@@ -330,11 +328,9 @@ class AppTheme {
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         labelStyle: AppTextStyles.bodyMedium.copyWith(
           color: AppColors.textSecondaryDark,
-          
         ),
         hintStyle: AppTextStyles.bodyMedium.copyWith(
           color: AppColors.textSecondaryDark,
-          
         ),
       ),
 
@@ -389,11 +385,9 @@ class AppTheme {
         backgroundColor: AppColors.surfaceDark,
         titleTextStyle: AppTextStyles.titleLarge.copyWith(
           color: AppColors.textPrimaryDark,
-          
         ),
         contentTextStyle: AppTextStyles.bodyMedium.copyWith(
           color: AppColors.textPrimaryDark,
-          
         ),
       ),
 
@@ -402,7 +396,6 @@ class AppTheme {
         backgroundColor: AppColors.surfaceDark,
         contentTextStyle: AppTextStyles.bodyMedium.copyWith(
           color: AppColors.textPrimaryDark,
-          
         ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
