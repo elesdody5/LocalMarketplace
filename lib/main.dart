@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'core/theme/app_theme.dart';
+import 'screens/theme_demo.dart';
 
 void main() {
   runApp(const MyApp());
@@ -52,6 +53,14 @@ class MyHomePage extends StatelessWidget {
               '${controller.counter}',
               style: Theme.of(context).textTheme.headlineMedium,
             )),
+            const SizedBox(height: 32),
+            ElevatedButton.icon(
+              onPressed: () {
+                Get.to(() => const ThemeDemo());
+              },
+              icon: const Icon(Icons.palette),
+              label: const Text('View Theme Demo'),
+            ),
           ],
         ),
       ),
