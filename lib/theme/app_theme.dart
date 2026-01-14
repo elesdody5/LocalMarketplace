@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'app_colors.dart';
 import 'app_text_styles.dart';
 
@@ -9,25 +8,68 @@ import 'app_text_styles.dart';
 class AppTheme {
   AppTheme._();
 
-  /// Get text theme with Google Fonts (Manrope font)
+  /// Get text theme with Manrope font family
   static TextTheme _getTextTheme(Color textColor, Color secondaryTextColor) {
-    return GoogleFonts.manropeTextTheme(
-      TextTheme(
-        displayLarge: AppTextStyles.displayLarge.copyWith(color: textColor),
-        displayMedium: AppTextStyles.displayMedium.copyWith(color: textColor),
-        displaySmall: AppTextStyles.displaySmall.copyWith(color: textColor),
-        headlineLarge: AppTextStyles.headlineLarge.copyWith(color: textColor),
-        headlineMedium: AppTextStyles.headlineMedium.copyWith(color: textColor),
-        headlineSmall: AppTextStyles.headlineSmall.copyWith(color: textColor),
-        titleLarge: AppTextStyles.titleLarge.copyWith(color: textColor),
-        titleMedium: AppTextStyles.titleMedium.copyWith(color: textColor),
-        titleSmall: AppTextStyles.titleSmall.copyWith(color: textColor),
-        bodyLarge: AppTextStyles.bodyLarge.copyWith(color: textColor),
-        bodyMedium: AppTextStyles.bodyMedium.copyWith(color: textColor),
-        bodySmall: AppTextStyles.bodySmall.copyWith(color: secondaryTextColor),
-        labelLarge: AppTextStyles.labelLarge.copyWith(color: textColor),
-        labelMedium: AppTextStyles.labelMedium.copyWith(color: textColor),
-        labelSmall: AppTextStyles.labelSmall.copyWith(color: secondaryTextColor),
+    return TextTheme(
+      displayLarge: AppTextStyles.displayLarge.copyWith(
+        color: textColor,
+        fontFamily: 'Manrope',
+      ),
+      displayMedium: AppTextStyles.displayMedium.copyWith(
+        color: textColor,
+        fontFamily: 'Manrope',
+      ),
+      displaySmall: AppTextStyles.displaySmall.copyWith(
+        color: textColor,
+        fontFamily: 'Manrope',
+      ),
+      headlineLarge: AppTextStyles.headlineLarge.copyWith(
+        color: textColor,
+        fontFamily: 'Manrope',
+      ),
+      headlineMedium: AppTextStyles.headlineMedium.copyWith(
+        color: textColor,
+        fontFamily: 'Manrope',
+      ),
+      headlineSmall: AppTextStyles.headlineSmall.copyWith(
+        color: textColor,
+        fontFamily: 'Manrope',
+      ),
+      titleLarge: AppTextStyles.titleLarge.copyWith(
+        color: textColor,
+        fontFamily: 'Manrope',
+      ),
+      titleMedium: AppTextStyles.titleMedium.copyWith(
+        color: textColor,
+        fontFamily: 'Manrope',
+      ),
+      titleSmall: AppTextStyles.titleSmall.copyWith(
+        color: textColor,
+        fontFamily: 'Manrope',
+      ),
+      bodyLarge: AppTextStyles.bodyLarge.copyWith(
+        color: textColor,
+        fontFamily: 'Manrope',
+      ),
+      bodyMedium: AppTextStyles.bodyMedium.copyWith(
+        color: textColor,
+        fontFamily: 'Manrope',
+      ),
+      bodySmall: AppTextStyles.bodySmall.copyWith(
+        color: secondaryTextColor,
+        fontFamily: 'Manrope',
+      ),
+      labelLarge: AppTextStyles.labelLarge.copyWith(
+        color: textColor,
+        fontFamily: 'Manrope',
+      ),
+      labelMedium: AppTextStyles.labelMedium.copyWith(
+        color: textColor,
+        fontFamily: 'Manrope',
+      ),
+      labelSmall: AppTextStyles.labelSmall.copyWith(
+        color: secondaryTextColor,
+        fontFamily: 'Manrope',
       ),
     );
   }
@@ -37,7 +79,7 @@ class AppTheme {
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.light,
-      
+      fontFamily: 'Manrope',
       // Color scheme
       colorScheme: const ColorScheme.light(
         primary: AppColors.primaryColor,
@@ -232,7 +274,8 @@ class AppTheme {
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.dark,
-      
+      fontFamily: 'Manrope',
+
       // Color scheme
       colorScheme: const ColorScheme.dark(
         primary: AppColors.primaryColorLight,
