@@ -6,9 +6,9 @@ class AppColors {
   AppColors._();
 
   // Primary colors - Blue tones for professional marketplace
-  static const Color primaryGreen = Color(0xFF0c5678);
-  static const Color primaryGreenLight = Color(0xFFeef6f9);
-  static const Color primaryGreenDark = Color(0xFF08415c);
+  static const Color primaryColor = Color(0xFF0c5678);
+  static const Color primaryColorLight = Color(0xFFeef6f9);
+  static const Color primaryColorDark = Color(0xFF08415c);
 
   // Secondary colors - Kept for compatibility
   static const Color secondaryGold = Color(0xFFD4AF37);

@@ -37,11 +37,15 @@ class ThemeDemo extends StatelessWidget {
             child: const Text('Elevated Button'),
           ),
           const SizedBox(height: 8),
+
+          // Simple outlined button
           OutlinedButton(
             onPressed: () {},
             child: const Text('Outlined Button'),
           ),
           const SizedBox(height: 8),
+
+          // Text button
           TextButton(
             onPressed: () {},
             child: const Text('Text Button'),
@@ -93,7 +97,7 @@ class ThemeDemo extends StatelessWidget {
           const SizedBox(height: 12),
           Row(
             children: [
-              Expanded(child: _colorBox('Primary', AppColors.primaryGreen)),
+              Expanded(child: _colorBox('Primary', AppColors.primaryColor)),
               const SizedBox(width: 8),
               Expanded(child: _colorBox('Secondary', AppColors.secondaryGold)),
             ],
@@ -113,6 +117,48 @@ class ThemeDemo extends StatelessWidget {
               const SizedBox(width: 8),
               Expanded(child: _colorBox('Verified', AppColors.verified)),
             ],
+          ),
+          const SizedBox(height: 24),
+
+          // Bottom Action Bar (from HTML)
+          const Text('Action Bar (HTML Layout):', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+          const SizedBox(height: 12),
+          Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Theme.of(context).brightness == Brightness.light
+                  ? AppColors.surfaceLight
+                  : AppColors.surfaceDark,
+              border: Border(
+                top: BorderSide(
+                  color: Theme.of(context).brightness == Brightness.light
+                      ? AppColors.dividerLight
+                      : AppColors.dividerDark,
+                ),
+              ),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: OutlinedButton.icon(
+                    onPressed: () {},
+                    icon: const Icon(Icons.call),
+                    label: const Text('Call'),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  flex: 2,
+                  child: ElevatedButton.icon(
+                    onPressed: () {},
+                    icon: const Icon(Icons.chat_bubble),
+                    label: const Text('Chat with Seller'),
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
