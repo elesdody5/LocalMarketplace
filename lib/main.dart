@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:presentation/onboarding/onboarding_screen.dart';
 import 'package:presentation/theme/app_theme.dart';
+
+import 'localization/messages.dart';
 import 'screens/theme_demo.dart';
 
 void main() {
@@ -13,12 +16,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Local Marketblace',
-      theme: AppTheme.lightTheme,
-      darkTheme: AppTheme.darkTheme,
-      themeMode: ThemeMode.system,
-      home: MyHomePage(title: 'Local Marketblace'),
-    );
+        title: 'Local Marketblace',
+        theme: AppTheme.lightTheme,
+        darkTheme: AppTheme.darkTheme,
+        themeMode: ThemeMode.system,
+        translations: Messages(),
+        locale: const Locale("en"),
+        fallbackLocale: const Locale('en'),
+        home: const OnboardingScreen());
   }
 }
 
@@ -50,9 +55,9 @@ class MyHomePage extends StatelessWidget {
               'You have pushed the button this many times:',
             ),
             Obx(() => Text(
-              '${controller.counter}',
-              style: Theme.of(context).textTheme.headlineMedium,
-            )),
+                  '${controller.counter}',
+                  style: Theme.of(context).textTheme.headlineMedium,
+                )),
             const SizedBox(height: 32),
             ElevatedButton.icon(
               onPressed: () {

@@ -1,0 +1,116 @@
+import 'package:flutter/material.dart';
+
+class OnboardingSecureChatIllustration extends StatelessWidget {
+  const OnboardingSecureChatIllustration({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 80, 16, 32),
+      child: Center(
+        child: AspectRatio(
+          aspectRatio: 1,
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxHeight: MediaQuery.of(context).size.height * 0.4,
+            ),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(24),
+                color: isDark
+                    ? const Color(0xFF1e293b).withValues(alpha: 0.5)
+                    : const Color(0xFFe8efeb),
+              ),
+              child: Center(
+                child: SizedBox(
+                  width: 192,
+                  height: 192,
+                  child: Stack(
+                    children: [
+                      // Chat bubble with dots (sender)
+                      Positioned(
+                        top: 16,
+                        left: 16,
+                        child: Container(
+                          width: 128,
+                          height: 96,
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF0c5678).withValues(alpha: 0.2),
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(16),
+                              topRight: Radius.circular(16),
+                              bottomRight: Radius.circular(16),
+                            ),
+                          ),
+                          child: Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                _buildDot(isDark),
+                                const SizedBox(width: 6),
+                                _buildDot(isDark),
+                                const SizedBox(width: 6),
+                                _buildDot(isDark),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      // Lock icon card (secure)
+                      Positioned(
+                        bottom: 16,
+                        right: 16,
+                        child: Container(
+                          width: 128,
+                          height: 96,
+                          decoration: BoxDecoration(
+                            color: isDark
+                                ? const Color(0xFF334155)
+                                : Colors.white,
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(16),
+                              topRight: Radius.circular(16),
+                              bottomLeft: Radius.circular(16),
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withValues(alpha: 0.05),
+                                blurRadius: 8,
+                                offset: const Offset(0, 2),
+                              ),
+                            ],
+                          ),
+                          child: const Center(
+                            child: Icon(
+                              Icons.lock_outline,
+                              size: 48,
+                              color: Color(0xFF0c5678),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDot(bool isDark) {
+    return Container(
+      width: 8,
+      height: 8,
+      decoration: BoxDecoration(
+        color: const Color(0xFF0c5678).withValues(alpha: 0.3),
+        shape: BoxShape.circle,
+      ),
+    );
+  }
+}
+

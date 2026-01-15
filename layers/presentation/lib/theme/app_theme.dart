@@ -131,7 +131,7 @@ class AppTheme {
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           elevation: 4,
-          shadowColor: AppColors.primaryColor.withOpacity(0.3),
+          shadowColor: AppColors.primaryColor.withValues(alpha: 0.3),
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
