@@ -29,5 +29,30 @@ Map<String, String> enJson = {
   'terms_privacy': 'By continuing, you agree to our Terms of Service & Privacy Policy.',
   'terms_of_service': 'Terms of Service',
   'privacy_policy': 'Privacy Policy',
+
+  // Signup Screen
+  'signup_title': 'Create your account',
+  'signup_subtitle': 'Connect with buyers and sellers near you.',
+  'full_name': 'Full Name',
+  'full_name_placeholder': 'John Doe',
+  'email_address': 'Email Address',
+  'email_placeholder': 'john@example.com',
+  'phone_number': 'Phone Number',
+  'phone_placeholder': '(555) 000-0000',
+  'select_country': 'Select Country',
+  'select_state': 'Select State/Region',
+  'terms_agreement': 'I agree to the Terms of Service and Privacy Policy.',
+  'create_account': 'Create Account',
+  'or_continue_with': 'Or continue with',
+  'already_have_account_login': 'Already have an account?',
+  'log_in': 'Log In',
+
+  // Validation Messages
+  'error_full_name_required': 'Please enter your full name',
+  'error_email_required': 'Please enter your email',
+  'error_email_invalid': 'Please enter a valid email',
+  'error_phone_required': 'Please enter your phone number',
 };
+
+
 

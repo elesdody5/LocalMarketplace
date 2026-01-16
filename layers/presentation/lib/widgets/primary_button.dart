@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:presentation/theme/app_colors.dart';
+import 'package:presentation/theme/app_text_styles.dart';
 
 class PrimaryButton extends StatelessWidget {
   final String label;
@@ -11,6 +11,14 @@ class PrimaryButton extends StatelessWidget {
   final IconData? suffixIcon;
   final EdgeInsetsGeometry padding;
   final double borderRadius;
+  final double elevation;
+  final Color? backgroundColor;
+  final Color? foregroundColor;
+  final TextStyle? textStyle;
+  final double? fontSize;
+  final FontWeight? fontWeight;
+  final double iconSize;
+  final double iconSpacing;
 
   const PrimaryButton({
     super.key,
@@ -20,72 +28,89 @@ class PrimaryButton extends StatelessWidget {
     this.isDisabled = false,
     this.prefixIcon,
     this.suffixIcon,
-    this.padding = const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-    this.borderRadius = 8,
+    this.padding = const EdgeInsets.symmetric(vertical: 16),
+    this.borderRadius = 12,
+    this.elevation = 4,
+    this.backgroundColor,
+    this.foregroundColor,
+    this.textStyle,
+    this.fontSize = 18,
+    this.fontWeight = FontWeight.w700,
+    this.iconSize = 20,
+    this.iconSpacing = 12,
   });
 
   bool get _effectiveDisabled => isDisabled || onPressed == null || isLoading;
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
+    final effectiveBackgroundColor = backgroundColor ?? AppColors.primaryColor;
+    final effectiveForegroundColor = foregroundColor ?? Colors.white;
 
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
         onPressed: _effectiveDisabled ? null : onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.primaryColor,
-          foregroundColor: Colors.white,
-          padding: const EdgeInsets.symmetric(vertical: 16),
+          backgroundColor: effectiveBackgroundColor,
+          foregroundColor: effectiveForegroundColor,
+          padding: padding,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(borderRadius),
           ),
-          elevation: 4,
-          shadowColor: AppColors.primaryColor.withValues(alpha: 0.3),
+          elevation: elevation,
+          shadowColor: effectiveBackgroundColor.withValues(alpha: 0.4),
         ),
-        child: _buildChild(),
+        child: _buildChild(effectiveForegroundColor),
       ),
     );
   }
 
-  Widget _buildChild() {
+  Widget _buildChild(Color effectiveForegroundColor) {
     if (isLoading) {
-      return const SizedBox(
+      return SizedBox(
         height: 20,
         width: 20,
-        child: CircularProgressIndicator(strokeWidth: 2),
-      );
-    }
-
-    if (prefixIcon == null && suffixIcon == null) {
-      return Text(
-        label,
-        style: Get.textTheme.titleMedium?.copyWith(
-          color: Colors.white,
-          fontSize: 18,
-          fontWeight: FontWeight.w700,
+        child: CircularProgressIndicator(
+          strokeWidth: 2,
+          color: effectiveForegroundColor,
         ),
       );
     }
 
+    // If no icons, just show text
+    if (prefixIcon == null && suffixIcon == null) {
+      return Text(
+        label,
+        style: textStyle ??
+            AppTextStyles.labelLarge.copyWith(
+              fontSize: fontSize,
+              fontWeight: fontWeight,
+            ),
+      );
+    }
+
+    // Show text with icons
     return Row(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        if (prefixIcon != null) Icon(prefixIcon, size: 18),
-        const SizedBox(width: 8),
+        if (prefixIcon != null) ...[
+          Icon(prefixIcon, size: iconSize),
+          SizedBox(width: iconSpacing),
+        ],
         Text(
           label,
-          style: Get.textTheme.titleMedium?.copyWith(
-            color: Colors.white,
-            fontSize: 18,
-            fontWeight: FontWeight.w700,
-          ),
+          style: textStyle ??
+              AppTextStyles.labelLarge.copyWith(
+                fontSize: fontSize,
+                fontWeight: fontWeight,
+              ),
         ),
-        const SizedBox(width: 8),
-        if (suffixIcon != null) Icon(suffixIcon, size: 18),
+        if (suffixIcon != null) ...[
+          SizedBox(width: iconSpacing),
+          Icon(suffixIcon, size: iconSize),
+        ],
       ],
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:presentation/routes/routes.dart';
 
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
@@ -48,10 +49,7 @@ class WelcomeScreen extends StatelessWidget {
             ),
           ],
         ),
-        actions: const [
-          LanguageToggle(),
-          SizedBox(width: 16),
-        ],
+        actions: const [LanguageToggle(), SizedBox(width: 16)],
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -98,12 +96,7 @@ class WelcomeScreen extends StatelessWidget {
                 // Get Started Button
                 ElevatedButton(
                   onPressed: () {
-                    // TODO: Navigate to signup screen
-                    Get.snackbar(
-                      'Coming Soon',
-                      'Sign up screen will be available soon',
-                      snackPosition: SnackPosition.BOTTOM,
-                    );
+                    Get.toNamed(signupRouteName);
                   },
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
@@ -129,7 +122,10 @@ class WelcomeScreen extends StatelessWidget {
                     Expanded(
                       child: SocialLoginButton(
                         label: 'google_button'.tr,
-                        icon: Icon(Icons.place),
+                        icon: Icon(
+                          Icons.g_mobiledata,
+                          color: const Color(0xFFDB4437),
+                        ),
                         onPressed: () {
                           Get.snackbar(
                             'Coming Soon',
@@ -202,4 +198,3 @@ class WelcomeScreen extends StatelessWidget {
     );
   }
 }
-

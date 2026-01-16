@@ -29,4 +29,27 @@ Map<String, String> arJson = {
   'terms_privacy': 'بالمتابعة، فإنك توافق على شروط الخدمة وسياسة الخصوصية الخاصة بنا.',
   'terms_of_service': 'شروط الخدمة',
   'privacy_policy': 'سياسة الخصوصية',
+
+  // Signup Screen
+  'signup_title': 'إنشاء حسابك',
+  'signup_subtitle': 'تواصل مع المشترين والبائعين بالقرب منك.',
+  'full_name': 'الاسم الكامل',
+  'full_name_placeholder': 'أحمد محمد',
+  'email_address': 'عنوان البريد الإلكتروني',
+  'email_placeholder': 'ahmed@example.com',
+  'phone_number': 'رقم الهاتف',
+  'phone_placeholder': '(555) 000-0000',
+  'select_country': 'اختر الدولة',
+  'select_state': 'اختر المنطقة/الولاية',
+  'terms_agreement': 'أوافق على شروط الخدمة وسياسة الخصوصية.',
+  'create_account': 'إنشاء حساب',
+  'or_continue_with': 'أو المتابعة باستخدام',
+  'already_have_account_login': 'هل لديك حساب بالفعل؟',
+  'log_in': 'تسجيل الدخول',
+
+  // Validation Messages
+  'error_full_name_required': 'الرجاء إدخال الاسم الكامل',
+  'error_email_required': 'الرجاء إدخال البريد الإلكتروني',
+  'error_email_invalid': 'الرجاء إدخال بريد إلكتروني صحيح',
+  'error_phone_required': 'الرجاء إدخال رقم الهاتف',
 };

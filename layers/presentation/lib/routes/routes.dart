@@ -2,6 +2,7 @@ const String splashRouteName = "/splash_screen";
 const String homeRouteName = '/home_screen';
 const String onBoardingRouteName = "/on_boarding_screen";
 const String welcomeRouteName = "/welcome_screen";
+const String signupRouteName = "/signup_screen";
 
 
 // class MediaPreviewScreenArgs {
