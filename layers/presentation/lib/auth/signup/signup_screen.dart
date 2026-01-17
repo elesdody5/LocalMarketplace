@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
+import 'package:presentation/auth/signup/signup_state_handler.dart';
 import 'package:presentation/theme/app_colors.dart';
 import 'package:presentation/theme/app_text_styles.dart';
 import 'package:presentation/widgets/custom_text_field.dart';
 import 'package:presentation/widgets/primary_button.dart' show PrimaryButton;
-import 'package:presentation/widgets/selector_button.dart';
+import 'package:presentation/widgets/drop_down_with_search.dart';
 
 import 'signup_controller.dart';
 import 'state/signup_actions.dart';
@@ -27,9 +28,10 @@ class SignupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-
+    final controller = Get.put(GetIt.I<SignupController>());
+    observeSignupEvents(controller.event);
     return GetBuilder<SignupController>(
-      init: GetIt.I<SignupController>(),
+      init: controller,
       builder: (controller) {
         return Scaffold(
           backgroundColor: isDark
@@ -143,34 +145,37 @@ class SignupScreen extends StatelessWidget {
                           const SizedBox(height: 20),
 
                           // Country Selector
-                          SelectorButton(
-                            label:
-                                controller.selectedCountry ??
-                                'select_country'.tr,
-                            leadingIcon: Icons.public,
-                            onTap: () {
-                              // TODO: Show country picker
-                              Get.snackbar(
-                                'Coming Soon',
-                                'Country selector will be available soon',
-                                snackPosition: SnackPosition.BOTTOM,
-                              );
+                          DropdownWithSearchDialog(
+                            name: 'country',
+                            items: controller.countries,
+                            hint: 'select_country'.tr,
+                            required: true,
+                            errorMessage: 'error_country_required'.tr,
+                            initialValue: controller.selectedCountry,
+                            prefixIcon: Icons.public,
+                            onChanged: (value) {
+                              controller.setSelectedCountry(value);
+                            },
+                            onSaved: (value) {
+                              controller.setSelectedCountry(value);
                             },
                           ),
                           const SizedBox(height: 20),
 
                           // State/Region Selector
-                          SelectorButton(
-                            label:
-                                controller.selectedState ?? 'select_state'.tr,
-                            leadingIcon: Icons.location_on,
-                            onTap: () {
-                              // TODO: Show state picker
-                              Get.snackbar(
-                                'Coming Soon',
-                                'State selector will be available soon',
-                                snackPosition: SnackPosition.BOTTOM,
-                              );
+                          DropdownWithSearchDialog(
+                            name: 'state',
+                            items: controller.states,
+                            hint: 'select_state'.tr,
+                            required: true,
+                            errorMessage: 'error_state_required'.tr,
+                            initialValue: controller.selectedState,
+                            prefixIcon: Icons.location_on,
+                            onChanged: (value) {
+                              controller.setSelectedState(value);
+                            },
+                            onSaved: (value) {
+                              controller.setSelectedState(value);
                             },
                           ),
                           const SizedBox(height: 24),

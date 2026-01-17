@@ -52,6 +52,8 @@ Map<String, String> enJson = {
   'error_email_required': 'Please enter your email',
   'error_email_invalid': 'Please enter a valid email',
   'error_phone_required': 'Please enter your phone number',
+  'error_country_required': 'Please select your country',
+  'error_state_required': 'Please select your state/region',
 };
 
 

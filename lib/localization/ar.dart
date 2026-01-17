@@ -52,4 +52,6 @@ Map<String, String> arJson = {
   'error_email_required': 'الرجاء إدخال البريد الإلكتروني',
   'error_email_invalid': 'الرجاء إدخال بريد إلكتروني صحيح',
   'error_phone_required': 'الرجاء إدخال رقم الهاتف',
+  'error_country_required': 'الرجاء اختيار الدولة',
+  'error_state_required': 'الرجاء اختيار المنطقة/الولاية',
 };
