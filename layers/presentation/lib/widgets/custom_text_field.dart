@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
 
 class CustomTextField extends StatelessWidget {
+  final String name;
   final TextEditingController? controller;
   final String? label;
   final String? placeholder;
@@ -17,9 +19,9 @@ class CustomTextField extends StatelessWidget {
   final bool enabled;
   final bool readOnly;
   final VoidCallback? onTap;
-  final ValueChanged<String>? onChanged;
+  final ValueChanged<String?>? onChanged;
   final VoidCallback? onEditingComplete;
-  final ValueChanged<String>? onFieldSubmitted;
+  final ValueChanged<String?>? onSaved;
   final List<TextInputFormatter>? inputFormatters;
   final TextCapitalization textCapitalization;
   final FocusNode? focusNode;
@@ -39,6 +41,7 @@ class CustomTextField extends StatelessWidget {
 
   const CustomTextField({
     super.key,
+    required this.name,
     this.controller,
     this.label,
     this.placeholder,
@@ -54,7 +57,7 @@ class CustomTextField extends StatelessWidget {
     this.onTap,
     this.onChanged,
     this.onEditingComplete,
-    this.onFieldSubmitted,
+    this.onSaved,
     this.inputFormatters,
     this.textCapitalization = TextCapitalization.none,
     this.focusNode,
@@ -93,9 +96,10 @@ class CustomTextField extends StatelessWidget {
           ),
           const SizedBox(height: 8),
         ],
-        TextFormField(
+        FormBuilderTextField(
+          name: name,
           controller: controller,
-          initialValue: initialValue,
+          initialValue: controller == null ? initialValue : null,
           keyboardType: keyboardType,
           obscureText: obscureText,
           maxLines: obscureText ? 1 : maxLines,
@@ -105,7 +109,7 @@ class CustomTextField extends StatelessWidget {
           onTap: onTap,
           onChanged: onChanged,
           onEditingComplete: onEditingComplete,
-          onFieldSubmitted: onFieldSubmitted,
+          onSaved: onSaved,
           validator: validator,
           inputFormatters: inputFormatters,
           textCapitalization: textCapitalization,
@@ -119,72 +123,31 @@ class CustomTextField extends StatelessWidget {
               ),
           decoration: InputDecoration(
             hintText: placeholder,
-            hintStyle: hintStyle ??
-                AppTextStyles.bodyMedium.copyWith(
-                  color: isDark
-                      ? AppColors.textSecondaryDark
-                      : AppColors.textSecondaryLight,
-                ),
+            hintStyle: hintStyle,
             suffixIcon: suffixIcon,
             prefixIcon: prefixIcon,
-            filled: true,
-            fillColor: fillColor ??
-                (isDark ? AppColors.surfaceDark : AppColors.surfaceLight),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(borderRadius),
-              borderSide: BorderSide(
-                color: enabledBorderColor ??
-                    (isDark ? AppColors.dividerDark : AppColors.dividerLight),
-                width: borderWidth,
-              ),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(borderRadius),
-              borderSide: BorderSide(
-                color: enabledBorderColor ??
-                    (isDark ? AppColors.dividerDark : AppColors.dividerLight),
-                width: borderWidth,
-              ),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(borderRadius),
-              borderSide: BorderSide(
-                color: focusedBorderColor ?? AppColors.primaryColor,
-                width: focusedBorderWidth,
-              ),
-            ),
-            errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(borderRadius),
-              borderSide: BorderSide(
-                color: errorBorderColor ?? AppColors.error,
-                width: borderWidth,
-              ),
-            ),
-            focusedErrorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(borderRadius),
-              borderSide: BorderSide(
-                color: errorBorderColor ?? AppColors.error,
-                width: focusedBorderWidth,
-              ),
-            ),
-            disabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(borderRadius),
-              borderSide: BorderSide(
-                color: isDark
-                    ? AppColors.dividerDark.withValues(alpha: 0.5)
-                    : AppColors.dividerLight.withValues(alpha: 0.5),
-                width: borderWidth,
-              ),
-            ),
-            contentPadding: contentPadding ??
-                const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 16,
-                ),
+            fillColor: fillColor,
+            contentPadding: contentPadding,
             counterText: maxLength != null ? null : '',
-          ),
+            border: _buildBorder(enabledBorderColor, borderWidth, borderRadius),
+            enabledBorder: _buildBorder(enabledBorderColor, borderWidth, borderRadius),
+            // focusedBorder: _buildBorder(focusedBorderColor, focusedBorderWidth, borderRadius),
+            errorBorder: _buildBorder(errorBorderColor, borderWidth, borderRadius),
+            // focusedErrorBorder: _buildBorder(errorBorderColor, focusedBorderWidth, borderRadius),
+          ).applyDefaults(Theme.of(context).inputDecorationTheme),
         ),
       ],
+    );
+  }
+
+  OutlineInputBorder? _buildBorder(Color? color, double width, double radius) {
+    if (color == null && width == 1 && radius == 12) return null;
+    return OutlineInputBorder(
+      borderRadius: BorderRadius.circular(radius),
+      borderSide: BorderSide(
+        color: color ?? Colors.transparent,
+        width: width,
+      ),
     );
   }
 }

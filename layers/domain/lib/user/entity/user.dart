@@ -1,0 +1,37 @@
+class User {
+  final String? id;
+  final String? name;
+  final String? email;
+  final String? phoneNumber;
+  final String? region;
+
+  User({this.id, this.name, this.email, this.phoneNumber, this.region});
+
+  bool equals(User other) {
+    return id == other.id;
+  }
+@override
+    bool operator ==(Object other) {
+      if (identical(this, other)) return true;
+      return other is User && other.id == id;
+    }
+
+    @override
+    int get hashCode => id.hashCode;
+
+  User copyWith({
+    String? id,
+    String? name,
+    String? email,
+    String? phoneNumber,
+    String? region,
+  }) {
+    return User(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      email: email ?? this.email,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
+      region: region ?? this.region,
+    );
+  }
+}

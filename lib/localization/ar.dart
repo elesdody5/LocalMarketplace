@@ -34,7 +34,7 @@ Map<String, String> arJson = {
   'signup_title': 'إنشاء حسابك',
   'signup_subtitle': 'تواصل مع المشترين والبائعين بالقرب منك.',
   'full_name': 'الاسم الكامل',
-  'full_name_placeholder': 'أحمد محمد',
+  'full_name_placeholder': 'الاسم',
   'email_address': 'عنوان البريد الإلكتروني',
   'email_placeholder': 'ahmed@example.com',
   'phone_number': 'رقم الهاتف',

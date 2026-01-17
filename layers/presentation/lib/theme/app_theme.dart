@@ -174,11 +174,11 @@ class AppTheme {
         fillColor: AppColors.surfaceLight,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: AppColors.dividerLight),
+          borderSide: const BorderSide(color: AppColors.dividerLight, width: 1),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: AppColors.dividerLight),
+          borderSide: const BorderSide(color: AppColors.dividerLight, width: 1),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
@@ -186,14 +186,32 @@ class AppTheme {
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: AppColors.error),
+          borderSide: const BorderSide(color: AppColors.error, width: 1),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(color: AppColors.error, width: 2),
+        ),
+        disabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(
+            color: AppColors.dividerLight.withValues(alpha: 0.5),
+            width: 1,
+          ),
         ),
         contentPadding:
             const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         labelStyle: AppTextStyles.bodyMedium.copyWith(
           color: AppColors.textSecondaryLight,
+          fontWeight: FontWeight.w600,
         ),
         hintStyle: AppTextStyles.bodyMedium.copyWith(
+          color: AppColors.textSecondaryLight,
+        ),
+        errorStyle: AppTextStyles.bodySmall.copyWith(
+          color: AppColors.error,
+        ),
+        counterStyle: AppTextStyles.bodySmall.copyWith(
           color: AppColors.textSecondaryLight,
         ),
       ),
@@ -372,11 +390,11 @@ class AppTheme {
         fillColor: AppColors.surfaceDark,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: AppColors.dividerDark),
+          borderSide: const BorderSide(color: AppColors.dividerDark, width: 1),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: AppColors.dividerDark),
+          borderSide: const BorderSide(color: AppColors.dividerDark, width: 1),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
@@ -385,14 +403,32 @@ class AppTheme {
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: AppColors.error),
+          borderSide: const BorderSide(color: AppColors.error, width: 1),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(color: AppColors.error, width: 2),
+        ),
+        disabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(
+            color: AppColors.dividerDark.withValues(alpha: 0.5),
+            width: 1,
+          ),
         ),
         contentPadding:
             const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         labelStyle: AppTextStyles.bodyMedium.copyWith(
           color: AppColors.textSecondaryDark,
+          fontWeight: FontWeight.w600,
         ),
         hintStyle: AppTextStyles.bodyMedium.copyWith(
+          color: AppColors.textSecondaryDark,
+        ),
+        errorStyle: AppTextStyles.bodySmall.copyWith(
+          color: AppColors.error,
+        ),
+        counterStyle: AppTextStyles.bodySmall.copyWith(
           color: AppColors.textSecondaryDark,
         ),
       ),

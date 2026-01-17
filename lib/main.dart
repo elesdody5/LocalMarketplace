@@ -1,6 +1,8 @@
+import 'package:domain/di/injection.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:local_market_place/pages/app_pages.dart';
+import 'package:presentation/di/injection.dart';
 import 'package:presentation/routes/routes.dart';
 import 'package:presentation/theme/app_theme.dart';
 
@@ -8,6 +10,8 @@ import 'localization/messages.dart';
 import 'screens/theme_demo.dart';
 
 void main() {
+  configurePresentationDependencies();
+  configureDomainDependencies();
   runApp(const MyApp());
 }
 

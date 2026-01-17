@@ -34,7 +34,7 @@ Map<String, String> enJson = {
   'signup_title': 'Create your account',
   'signup_subtitle': 'Connect with buyers and sellers near you.',
   'full_name': 'Full Name',
-  'full_name_placeholder': 'John Doe',
+  'full_name_placeholder': 'Name',
   'email_address': 'Email Address',
   'email_placeholder': 'john@example.com',
   'phone_number': 'Phone Number',
