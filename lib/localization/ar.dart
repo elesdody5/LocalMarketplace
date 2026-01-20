@@ -46,6 +46,10 @@ Map<String, String> arJson = {
   'or_continue_with': 'أو المتابعة باستخدام',
   'already_have_account_login': 'هل لديك حساب بالفعل؟',
   'log_in': 'تسجيل الدخول',
+  "password": "كلمة المرور",
+  "password_placeholder": "أدخل كلمة المرور الخاصة بك",
+  "confirm_password": "تأكيد كلمة المرور",
+  "confirm_password_placeholder": "أعد إدخال كلمة المرور",
 
   // Validation Messages
   'error_full_name_required': 'الرجاء إدخال الاسم الكامل',
@@ -54,4 +58,7 @@ Map<String, String> arJson = {
   'error_phone_required': 'الرجاء إدخال رقم الهاتف',
   'error_country_required': 'الرجاء اختيار الدولة',
   'error_state_required': 'الرجاء اختيار المنطقة/الولاية',
+  'error_password_invalid': 'يجب أن تحتوي كلمة المرور على 8 أحرف على الأقل، وحرف كبير، وحرف صغير، ورقم',
+  'error_confirm_password_required': 'الرجاء تأكيد كلمة المرور',
+  'error_passwords_dont_match': 'كلمات المرور غير متطابقة',
 };

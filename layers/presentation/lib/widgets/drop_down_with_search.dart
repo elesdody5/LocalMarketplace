@@ -94,11 +94,11 @@ class _DropdownWithSearchDialogState extends State<DropdownWithSearchDialog> {
 
     final effectiveBackgroundColor = widget.backgroundColor ??
         (isDark ? AppColors.surfaceDark : AppColors.surfaceLight);
-    final effectiveBorderColor = widget.borderColor ??
-        (isDark ? AppColors.dividerDark : AppColors.dividerLight);
+    final effectiveBorderColor = widget.borderColor ?? AppColors.primaryColor;
     final effectiveTextColor = widget.textColor ??
-        (isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight);
-    final effectiveIconColor = widget.iconColor ?? effectiveTextColor;
+        (isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight);
+    final effectiveIconColor = widget.iconColor ?? AppColors.primaryColor;
+    final effectivePrefixIconColor = widget.prefixIconColor ?? AppColors.primaryColor;
 
     return FormBuilderTextField(
       name: widget.name,
@@ -107,6 +107,7 @@ class _DropdownWithSearchDialogState extends State<DropdownWithSearchDialog> {
       style: widget.textStyle ??
           AppTextStyles.bodyMedium.copyWith(
             color: effectiveTextColor,
+            fontWeight: FontWeight.w500,
           ),
       onSaved: (_) {
         if (controller.text.isNotEmpty) widget.onSaved?.call(controller.text);
@@ -127,13 +128,15 @@ class _DropdownWithSearchDialogState extends State<DropdownWithSearchDialog> {
             hintStyle: widget.textStyle ??
                 AppTextStyles.bodyMedium.copyWith(
                   color: effectiveTextColor.withValues(alpha: 0.6),
+                  fontWeight: FontWeight.w500,
                 ),
             filled: true,
             fillColor: effectiveBackgroundColor,
+            contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
             prefixIcon: widget.prefixIcon != null
                 ? Icon(
                     widget.prefixIcon,
-                    color: widget.prefixIconColor ?? effectiveIconColor,
+                    color: effectivePrefixIconColor,
                     size: widget.iconSize,
                   )
                 : null,
@@ -149,18 +152,25 @@ class _DropdownWithSearchDialogState extends State<DropdownWithSearchDialog> {
                 width: widget.borderWidth,
               ),
             ),
-            enabledBorder: OutlineInputBorder(
+            // enabledBorder: OutlineInputBorder(
+            //   borderRadius: BorderRadius.circular(widget.borderRadius),
+            //   borderSide: BorderSide(
+            //     color: effectiveBorderColor,
+            //     width: widget.borderWidth * 2,
+            //   ),
+            // ),
+            errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(widget.borderRadius),
               borderSide: BorderSide(
-                color: effectiveBorderColor,
+                color: AppColors.error,
                 width: widget.borderWidth,
               ),
             ),
-            focusedBorder: OutlineInputBorder(
+            focusedErrorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(widget.borderRadius),
               borderSide: BorderSide(
-                color: effectiveBorderColor,
-                width: widget.borderWidth,
+                color: AppColors.error,
+                width: widget.borderWidth * 2,
               ),
             ),
           ),

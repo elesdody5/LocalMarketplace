@@ -46,6 +46,10 @@ Map<String, String> enJson = {
   'or_continue_with': 'Or continue with',
   'already_have_account_login': 'Already have an account?',
   'log_in': 'Log In',
+  "password": "Password",
+  "password_placeholder": "Enter your password",
+  "confirm_password": "Confirm Password",
+  "confirm_password_placeholder": "Re-enter your password",
 
   // Validation Messages
   'error_full_name_required': 'Please enter your full name',
@@ -54,6 +58,9 @@ Map<String, String> enJson = {
   'error_phone_required': 'Please enter your phone number',
   'error_country_required': 'Please select your country',
   'error_state_required': 'Please select your state/region',
+  'error_password_invalid': 'Password must contain at least 8 characters, one uppercase letter, one lowercase letter, and one number',
+  'error_confirm_password_required': 'Please confirm your password',
+  'error_passwords_dont_match': 'Passwords do not match',
 };
 
 

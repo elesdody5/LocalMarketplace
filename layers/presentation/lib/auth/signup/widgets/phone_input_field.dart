@@ -9,7 +9,6 @@ class PhoneInputField extends StatelessWidget {
   final String name;
   final String label;
   final String placeholder;
-  final String countryFlag;
   final ValueChanged<String?>? onSaved;
 
   const PhoneInputField({
@@ -17,7 +16,6 @@ class PhoneInputField extends StatelessWidget {
     required this.name,
     required this.label,
     required this.placeholder,
-    this.countryFlag = '🇸🇦',
     this.onSaved,
   });
 
@@ -49,9 +47,9 @@ class PhoneInputField extends StatelessWidget {
               padding: const EdgeInsets.only(right: 12),
               child: Center(
                 widthFactor: 1,
-                child: Text(
-                  countryFlag,
-                  style: const TextStyle(fontSize: 24),
+                child: Icon(
+                  Icons.phone_android_outlined,
+                  color: AppColors.primaryColor
                 ),
               ),
             ),

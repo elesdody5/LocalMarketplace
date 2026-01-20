@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/local_market_place.iml" filepath="$PROJECT_DIR$/local_market_place.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android/local_market_place_android.iml" filepath="$PROJECT_DIR$/android/local_market_place_android.iml" />
     </modules>
   </component>
 </project>

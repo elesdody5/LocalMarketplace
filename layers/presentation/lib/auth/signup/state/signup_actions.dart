@@ -9,3 +9,8 @@ class SaveUserData extends SignedUpAction {
 
   SaveUserData(this.user);
 }
+class UpdatePassword extends SignedUpAction {
+  final String password;
+
+  UpdatePassword(this.password);
+}

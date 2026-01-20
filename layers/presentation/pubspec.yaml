@@ -34,7 +34,9 @@ dependencies:
   cupertino_icons: ^1.0.8
   get: ^4.7.3
   flutter_form_builder: ^10.2.0
-  form_builder_validators: ^11.2.0  # Dependency Injection
+  form_builder_validators: ^11.2.0
+  image_picker: ^1.1.2  # Image picker for profile pictures
+  # Dependency Injection
   get_it: ^9.2.0
   injectable: ^2.7.1+4
 

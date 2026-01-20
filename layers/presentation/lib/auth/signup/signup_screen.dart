@@ -6,12 +6,14 @@ import 'package:presentation/auth/signup/signup_state_handler.dart';
 import 'package:presentation/theme/app_colors.dart';
 import 'package:presentation/theme/app_text_styles.dart';
 import 'package:presentation/widgets/custom_text_field.dart';
-import 'package:presentation/widgets/primary_button.dart' show PrimaryButton;
 import 'package:presentation/widgets/drop_down_with_search.dart';
+import 'package:presentation/widgets/primary_button.dart' show PrimaryButton;
 
 import 'signup_controller.dart';
 import 'state/signup_actions.dart';
+import 'widgets/password_input_field.dart';
 import 'widgets/phone_input_field.dart';
+import 'widgets/profile_picture_picker.dart';
 import 'widgets/social_login_section.dart';
 import 'widgets/terms_checkbox.dart';
 
@@ -87,6 +89,24 @@ class SignupScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
+                          // Profile Picture Picker
+                          ProfilePicturePicker(
+                            name: 'profile_picture',
+                            onChanged: (image) {
+                              // TODO: Handle profile picture change
+                              debugPrint(
+                                'Profile picture selected: ${image?.path}',
+                              );
+                            },
+                            onSaved: (image) {
+                              // TODO: Save profile picture
+                              debugPrint(
+                                'Profile picture saved: ${image?.path}',
+                              );
+                            },
+                          ),
+                          const SizedBox(height: 24),
+
                           // Full Name Field
                           CustomTextField(
                             name: 'full_name',
@@ -141,6 +161,62 @@ class SignupScreen extends StatelessWidget {
                                 ),
                               ),
                             ),
+                          ),
+                          const SizedBox(height: 20),
+
+                          // Password Field
+                          PasswordInputField(
+                            name: 'password',
+                            label: 'password'.tr,
+                            placeholder: 'password_placeholder'.tr,
+                            onSaved: (password) => password != null
+                                ? controller.signupAction(
+                                    UpdatePassword(password),
+                                  )
+                                : null,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'error_password_invalid'.tr;
+                              }
+                              // Check all validation rules
+                              final hasMinLength = value.length >= 8;
+                              final hasLowercase = value.contains(
+                                RegExp(r'[a-z]'),
+                              );
+                              final hasUppercase = value.contains(
+                                RegExp(r'[A-Z]'),
+                              );
+                              final hasDigit = value.contains(RegExp(r'[0-9]'));
+
+                              if (!hasMinLength ||
+                                  !hasLowercase ||
+                                  !hasUppercase ||
+                                  !hasDigit) {
+                                return 'error_password_invalid'.tr;
+                              }
+                              return null;
+                            },
+                          ),
+                          const SizedBox(height: 20),
+
+                          // Confirm Password Field
+                          PasswordInputField(
+                            name: 'confirm_password',
+                            label: 'confirm_password'.tr,
+                            placeholder: 'confirm_password_placeholder'.tr,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'error_confirm_password_required'.tr;
+                              }
+                              final password = _formKey
+                                  .currentState
+                                  ?.fields['password']
+                                  ?.value;
+                              if (value != password) {
+                                return 'error_passwords_dont_match'.tr;
+                              }
+                              return null;
+                            },
                           ),
                           const SizedBox(height: 20),
 
