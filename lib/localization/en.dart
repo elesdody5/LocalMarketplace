@@ -51,6 +51,16 @@ Map<String, String> enJson = {
   "confirm_password": "Confirm Password",
   "confirm_password_placeholder": "Re-enter your password",
 
+  // Login Screen
+  'welcome_back_title': 'Welcome back!',
+  'welcome_back_subtitle': 'Buy and sell locally with ease. Log in to manage your listings.',
+  'email_or_phone': 'Email or Phone Number',
+  'email_or_phone_placeholder': 'Enter your email or phone',
+  'forgot_password': 'Forgot Password?',
+  'login_button': 'Log In',
+  'dont_have_account': "Don't have an account?",
+  'sign_up': 'Sign Up',
+
   // Validation Messages
   'error_full_name_required': 'Please enter your full name',
   'error_email_required': 'Please enter your email',
@@ -61,6 +71,7 @@ Map<String, String> enJson = {
   'error_password_invalid': 'Password must contain at least 8 characters, one uppercase letter, one lowercase letter, and one number',
   'error_confirm_password_required': 'Please confirm your password',
   'error_passwords_dont_match': 'Passwords do not match',
+  'error_email_or_phone_required': 'Please enter your email or phone number',
 };
 
 

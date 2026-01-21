@@ -34,6 +34,8 @@ dependencies:
   # Dependency Injection
   get_it: ^9.2.0
   injectable: ^2.7.1+4
+  get_storage: ^2.1.1
+
 
 dev_dependencies:
   flutter_test:

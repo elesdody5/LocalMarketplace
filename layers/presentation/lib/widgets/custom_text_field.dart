@@ -78,7 +78,12 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+    // ✅ Cache theme values at build start
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
+    // Pre-calculate colors for performance
+    final textPrimaryColor = isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -88,9 +93,7 @@ class CustomTextField extends StatelessWidget {
             label!,
             style: labelStyle ??
                 AppTextStyles.labelMedium.copyWith(
-                  color: isDark
-                      ? AppColors.textPrimaryDark
-                      : AppColors.textPrimaryLight,
+                  color: textPrimaryColor,
                   fontWeight: FontWeight.w600,
                 ),
           ),
@@ -117,9 +120,7 @@ class CustomTextField extends StatelessWidget {
           autovalidateMode: autovalidateMode,
           style: textStyle ??
               AppTextStyles.bodyMedium.copyWith(
-                color: isDark
-                    ? AppColors.textPrimaryDark
-                    : AppColors.textPrimaryLight,
+                color: textPrimaryColor,
               ),
           decoration: InputDecoration(
             hintText: placeholder,
@@ -134,7 +135,7 @@ class CustomTextField extends StatelessWidget {
             // focusedBorder: _buildBorder(focusedBorderColor, focusedBorderWidth, borderRadius),
             errorBorder: _buildBorder(errorBorderColor, borderWidth, borderRadius),
             // focusedErrorBorder: _buildBorder(errorBorderColor, focusedBorderWidth, borderRadius),
-          ).applyDefaults(Theme.of(context).inputDecorationTheme),
+          ).applyDefaults(theme.inputDecorationTheme),
         ),
       ],
     );

@@ -33,9 +33,9 @@ class MockSignupUseCase extends _i1.Mock implements _i2.SignupUseCase {
   }
 
   @override
-  _i3.Future<void> call(_i4.User? user) =>
+  _i3.Future<void> call(_i4.User? user, String? password) =>
       (super.noSuchMethod(
-            Invocation.method(#call, [user]),
+            Invocation.method(#call, [user, password]),
             returnValue: _i3.Future<void>.value(),
             returnValueForMissingStub: _i3.Future<void>.value(),
           )

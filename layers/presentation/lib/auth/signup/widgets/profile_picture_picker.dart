@@ -116,7 +116,15 @@ class _ProfilePicturePickerState extends State<ProfilePicturePicker> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+    // ✅ Cache theme values at build start
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
+    // Pre-calculate colors for performance
+    final surfaceColor = isDark ? AppColors.surfaceDark : const Color(0xFFF9FAFB);
+    final borderColor = isDark ? AppColors.backgroundDark : AppColors.backgroundLight;
+    final primaryBorderColor = AppColors.primaryColor.withValues(alpha: 0.3);
+    final shadowColor = Colors.black.withValues(alpha: 0.2);
 
     return FormBuilderField<XFile?>(
       name: widget.name,
@@ -138,12 +146,10 @@ class _ProfilePicturePickerState extends State<ProfilePicturePicker> {
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(
-                        color: AppColors.primaryColor.withValues(alpha: 0.3),
+                        color: primaryBorderColor,
                         width: 2,
                       ),
-                      color: isDark
-                          ? AppColors.surfaceDark
-                          : const Color(0xFFF9FAFB),
+                      color: surfaceColor,
                     ),
                     child: ClipOval(
                       child: _selectedImage != null
@@ -158,34 +164,34 @@ class _ProfilePicturePickerState extends State<ProfilePicturePicker> {
                             ),
                     ),
                   ),
-                  // Camera button overlay
+                  // Camera button overlay - ✅ Wrapped in RepaintBoundary
                   Positioned(
                     bottom: 0,
                     right: 4,
-                    child: Container(
-                      width: 36,
-                      height: 36,
-                      decoration: BoxDecoration(
-                        color: AppColors.primaryColor,
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: isDark
-                              ? AppColors.backgroundDark
-                              : AppColors.backgroundLight,
-                          width: 3,
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withValues(alpha: 0.2),
-                            blurRadius: 4,
-                            offset: const Offset(0, 2),
+                    child: RepaintBoundary(
+                      child: Container(
+                        width: 36,
+                        height: 36,
+                        decoration: BoxDecoration(
+                          color: AppColors.primaryColor,
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: borderColor,
+                            width: 3,
                           ),
-                        ],
-                      ),
-                      child: const Icon(
-                        Icons.camera_alt,
-                        color: Colors.white,
-                        size: 16,
+                          boxShadow: [
+                            BoxShadow(
+                              color: shadowColor,
+                              blurRadius: 4,
+                              offset: const Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: const Icon(
+                          Icons.camera_alt,
+                          color: Colors.white,
+                          size: 16,
+                        ),
                       ),
                     ),
                   ),

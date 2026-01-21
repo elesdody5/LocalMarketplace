@@ -70,10 +70,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+    // ✅ Cache theme values at build start
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
+    // Pre-calculate colors for performance
+    final backgroundColor = isDark ? AppColors.backgroundDark : const Color(0xFFf4f9fc);
 
     return Scaffold(
-      backgroundColor: isDark ? AppColors.backgroundDark : const Color(0xFFf4f9fc),
+      backgroundColor: backgroundColor,
       body: SafeArea(
         child: Column(
           children: [
@@ -86,6 +91,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 controller: _pageController,
                 onPageChanged: _onPageChanged,
                 itemCount: _pages.length,
+                physics: const BouncingScrollPhysics(),
                 itemBuilder: (context, index) {
                   return _buildPageContent(_pages[index]);
                 },
@@ -95,7 +101,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             // Bottom content card
             Container(
               decoration: BoxDecoration(
-                color: isDark ? AppColors.backgroundDark : const Color(0xFFf4f9fc),
+                color: backgroundColor,
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(24),
                   topRight: Radius.circular(24),
@@ -140,13 +146,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   Widget _buildPageContent(OnboardingPageData page) {
-    if (page.useSecureChatIllustration) {
-      return const OnboardingSecureChatIllustration();
-    }
-
-    return OnboardingImageCard(
-      imagePath: page.imagePath ?? '',
-      isAsset: page.isAsset,
+    // ✅ Wrap in RepaintBoundary to prevent expensive repaints
+    return RepaintBoundary(
+      child: page.useSecureChatIllustration
+          ? const OnboardingSecureChatIllustration()
+          : OnboardingImageCard(
+              imagePath: page.imagePath ?? '',
+              isAsset: page.isAsset,
+            ),
     );
   }
 }

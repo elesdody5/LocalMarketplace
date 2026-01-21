@@ -18,32 +18,43 @@ void main() {
     signupController = SignupController(mockSignupUseCase);
   });
 
- test(
-      "when user sign up with valid data the event should be updated with success",
-      () async {
-        var user = User();
-        when(mockSignupUseCase.call(user)).thenAnswer((_) async => Future.value());
-        await signupController.signupAction(SaveUserData(user));
-        await signupController.signupAction(Signup());
-        var actual = signupController.event;
-        var matcher = isA<SignupSuccessEvent>();
-        verify(mockSignupUseCase.call(user)).called(1);
-        expect(actual, matcher);
-      },
-    );
+  tearDown((){
+    clearInteractions(mockSignupUseCase);
+    clearInteractions(mockSignupUseCase);
+  });
 
-    test(
-      "when user sign up and an error occurs the event should be updated with error",
-      () async {
-        var user = User();
-        final exception = Exception("signup failed");
-        when(mockSignupUseCase.call(user)).thenThrow(exception);
-        await signupController.signupAction(SaveUserData(user));
-        await signupController.signupAction(Signup());
-        var actual = signupController.event;
-        var matcher = isA<SignupErrorEvent>();
-        verify(mockSignupUseCase.call(user)).called(1);
-        expect(actual, matcher);
-      },
-    );
+  test(
+    "when user sign up with valid data the event should be updated with success",
+    () async {
+      var user = User();
+      var password = "password123";
+      when(
+        mockSignupUseCase.call(user, password),
+      ).thenAnswer((_) async => Future.value());
+      await signupController.signupAction(SaveUserData(user));
+      await signupController.signupAction(UpdatePassword(password));
+      await signupController.signupAction(Signup());
+      var actual = signupController.event.value;
+      var matcher = isA<SignupSuccessEvent>();
+      verify(mockSignupUseCase.call(user, password)).called(1);
+      expect(actual, matcher);
+    },
+  );
+
+  test(
+    "when user sign up and an error occurs the event should be updated with error",
+    () async {
+      var user = User();
+      final exception = Exception("signup failed");
+      final password = "password123";
+      when(mockSignupUseCase.call(user, password)).thenThrow(exception);
+      await signupController.signupAction(SaveUserData(user));
+      await signupController.signupAction(UpdatePassword(password));
+      await signupController.signupAction(Signup());
+      var actual = signupController.event.value;
+      var matcher = isA<SignupErrorEvent>();
+      verify(mockSignupUseCase.call(user, password)).called(1);
+      expect(actual, matcher);
+    },
+  );
 }

@@ -13,18 +13,25 @@ class OnboardingPageIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+    // ✅ Cache theme values at build start
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
+    // Pre-calculate inactive color for performance
+    final inactiveColor = isDark
+        ? const Color(0xFF374151)
+        : const Color(0xFFcfdbe6);
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: List.generate(
         totalPages,
-        (index) => _buildIndicator(index, isDark),
+        (index) => _buildIndicator(index, inactiveColor),
       ),
     );
   }
 
-  Widget _buildIndicator(int index, bool isDark) {
+  Widget _buildIndicator(int index, Color inactiveColor) {
     final isActive = index == currentPage;
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
@@ -32,11 +39,7 @@ class OnboardingPageIndicator extends StatelessWidget {
       height: 10,
       width: isActive ? 32 : 10,
       decoration: BoxDecoration(
-        color: isActive
-            ? AppColors.primaryColor
-            : isDark
-                ? const Color(0xFF374151)
-                : const Color(0xFFcfdbe6),
+        color: isActive ? AppColors.primaryColor : inactiveColor,
         borderRadius: BorderRadius.circular(5),
       ),
     );

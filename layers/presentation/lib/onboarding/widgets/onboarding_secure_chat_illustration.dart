@@ -5,7 +5,18 @@ class OnboardingSecureChatIllustration extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+    // ✅ Cache theme values at build start
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
+    // Pre-calculate colors for performance
+    final backgroundColor = isDark
+        ? const Color(0xFF1e293b).withValues(alpha: 0.5)
+        : const Color(0xFFe8efeb);
+    final chatBubbleColor = const Color(0xFF0c5678).withValues(alpha: 0.2);
+    final lockCardColor = isDark ? const Color(0xFF334155) : Colors.white;
+    final shadowColor = Colors.black.withValues(alpha: 0.05);
+    final dotColor = const Color(0xFF0c5678).withValues(alpha: 0.3);
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 80, 16, 32),
@@ -19,9 +30,7 @@ class OnboardingSecureChatIllustration extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(24),
-                color: isDark
-                    ? const Color(0xFF1e293b).withValues(alpha: 0.5)
-                    : const Color(0xFFe8efeb),
+                color: backgroundColor,
               ),
               child: Center(
                 child: SizedBox(
@@ -29,64 +38,66 @@ class OnboardingSecureChatIllustration extends StatelessWidget {
                   height: 192,
                   child: Stack(
                     children: [
-                      // Chat bubble with dots (sender)
+                      // Chat bubble with dots (sender) - ✅ Wrapped in RepaintBoundary
                       Positioned(
                         top: 16,
                         left: 16,
-                        child: Container(
-                          width: 128,
-                          height: 96,
-                          decoration: BoxDecoration(
-                            color: const Color(0xFF0c5678).withValues(alpha: 0.2),
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(16),
-                              topRight: Radius.circular(16),
-                              bottomRight: Radius.circular(16),
+                        child: RepaintBoundary(
+                          child: Container(
+                            width: 128,
+                            height: 96,
+                            decoration: BoxDecoration(
+                              color: chatBubbleColor,
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(16),
+                                topRight: Radius.circular(16),
+                                bottomRight: Radius.circular(16),
+                              ),
                             ),
-                          ),
-                          child: Center(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                _buildDot(isDark),
-                                const SizedBox(width: 6),
-                                _buildDot(isDark),
-                                const SizedBox(width: 6),
-                                _buildDot(isDark),
-                              ],
+                            child: Center(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  _buildDot(dotColor),
+                                  const SizedBox(width: 6),
+                                  _buildDot(dotColor),
+                                  const SizedBox(width: 6),
+                                  _buildDot(dotColor),
+                                ],
+                              ),
                             ),
                           ),
                         ),
                       ),
-                      // Lock icon card (secure)
+                      // Lock icon card (secure) - ✅ Wrapped in RepaintBoundary
                       Positioned(
                         bottom: 16,
                         right: 16,
-                        child: Container(
-                          width: 128,
-                          height: 96,
-                          decoration: BoxDecoration(
-                            color: isDark
-                                ? const Color(0xFF334155)
-                                : Colors.white,
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(16),
-                              topRight: Radius.circular(16),
-                              bottomLeft: Radius.circular(16),
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withValues(alpha: 0.05),
-                                blurRadius: 8,
-                                offset: const Offset(0, 2),
+                        child: RepaintBoundary(
+                          child: Container(
+                            width: 128,
+                            height: 96,
+                            decoration: BoxDecoration(
+                              color: lockCardColor,
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(16),
+                                topRight: Radius.circular(16),
+                                bottomLeft: Radius.circular(16),
                               ),
-                            ],
-                          ),
-                          child: const Center(
-                            child: Icon(
-                              Icons.lock_outline,
-                              size: 48,
-                              color: Color(0xFF0c5678),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: shadowColor,
+                                  blurRadius: 8,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            child: const Center(
+                              child: Icon(
+                                Icons.lock_outline,
+                                size: 48,
+                                color: Color(0xFF0c5678),
+                              ),
                             ),
                           ),
                         ),
@@ -102,12 +113,12 @@ class OnboardingSecureChatIllustration extends StatelessWidget {
     );
   }
 
-  Widget _buildDot(bool isDark) {
+  Widget _buildDot(Color dotColor) {
     return Container(
       width: 8,
       height: 8,
       decoration: BoxDecoration(
-        color: const Color(0xFF0c5678).withValues(alpha: 0.3),
+        color: dotColor,
         shape: BoxShape.circle,
       ),
     );

@@ -14,7 +14,14 @@ class WelcomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+    // ✅ Cache theme values at build start
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
+    // Pre-calculate colors for performance
+    final textPrimaryColor = isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight;
+    final textSecondaryColor = isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight;
+    final primaryShadow = AppColors.primaryColor.withValues(alpha: 0.4);
 
     return Scaffold(
       appBar: AppBar(
@@ -41,9 +48,7 @@ class WelcomeScreen extends StatelessWidget {
             Text(
               'app_name'.tr,
               style: AppTextStyles.titleLarge.copyWith(
-                color: isDark
-                    ? AppColors.textPrimaryDark
-                    : AppColors.textPrimaryLight,
+                color: textPrimaryColor,
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -53,6 +58,7 @@ class WelcomeScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24.0),
             child: Column(
@@ -72,9 +78,7 @@ class WelcomeScreen extends StatelessWidget {
                 Text(
                   'welcome_title'.tr,
                   style: AppTextStyles.headlineMedium.copyWith(
-                    color: isDark
-                        ? AppColors.textPrimaryDark
-                        : AppColors.textPrimaryLight,
+                    color: textPrimaryColor,
                     fontWeight: FontWeight.w800,
                   ),
                   textAlign: TextAlign.center,
@@ -85,9 +89,7 @@ class WelcomeScreen extends StatelessWidget {
                 Text(
                   'welcome_subtitle'.tr,
                   style: AppTextStyles.bodyLarge.copyWith(
-                    color: isDark
-                        ? AppColors.textSecondaryDark
-                        : AppColors.textSecondaryLight,
+                    color: textSecondaryColor,
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -104,7 +106,7 @@ class WelcomeScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(16),
                     ),
                     elevation: 8,
-                    shadowColor: AppColors.primaryColor.withValues(alpha: 0.4),
+                    shadowColor: primaryShadow,
                   ),
                   child: Text(
                     'get_started_button'.tr,
@@ -122,9 +124,9 @@ class WelcomeScreen extends StatelessWidget {
                     Expanded(
                       child: SocialLoginButton(
                         label: 'google_button'.tr,
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.g_mobiledata,
-                          color: const Color(0xFFDB4437),
+                          color: Color(0xFFDB4437),
                         ),
                         onPressed: () {
                           Get.snackbar(
@@ -160,19 +162,12 @@ class WelcomeScreen extends StatelessWidget {
                 // Already have account link
                 TextButton(
                   onPressed: () {
-                    // TODO: Navigate to login screen
-                    Get.snackbar(
-                      'Coming Soon',
-                      'Login screen will be available soon',
-                      snackPosition: SnackPosition.BOTTOM,
-                    );
+                    Get.toNamed(loginRouteName);
                   },
                   child: Text(
                     'already_have_account'.tr,
                     style: AppTextStyles.labelLarge.copyWith(
-                      color: isDark
-                          ? AppColors.textSecondaryDark
-                          : AppColors.textSecondaryLight,
+                      color: textSecondaryColor,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -183,9 +178,7 @@ class WelcomeScreen extends StatelessWidget {
                 Text(
                   'terms_privacy'.tr,
                   style: AppTextStyles.bodySmall.copyWith(
-                    color: isDark
-                        ? AppColors.textSecondaryDark
-                        : AppColors.textSecondaryLight,
+                    color: textSecondaryColor,
                   ),
                   textAlign: TextAlign.center,
                 ),

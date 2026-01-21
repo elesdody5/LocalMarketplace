@@ -1,6 +1,5 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
 
 import 'package:presentation/theme/app_colors.dart';
@@ -34,7 +33,13 @@ class TermsCheckbox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+    // ✅ Cache theme values at build start
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
+    // Pre-calculate colors for performance
+    final textSecondaryColor = isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight;
+    final dividerColor = isDark ? AppColors.dividerDark : AppColors.dividerLight;
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,7 +55,7 @@ class TermsCheckbox extends StatelessWidget {
               borderRadius: BorderRadius.circular(4),
             ),
             side: BorderSide(
-              color: isDark ? AppColors.dividerDark : AppColors.dividerLight,
+              color: dividerColor,
               width: 1.5,
             ),
           ),
@@ -60,16 +65,14 @@ class TermsCheckbox extends StatelessWidget {
           child: RichText(
             text: TextSpan(
               style: AppTextStyles.bodySmall.copyWith(
-                color: isDark
-                    ? AppColors.textSecondaryDark
-                    : AppColors.textSecondaryLight,
+                color: textSecondaryColor,
                 height: 1.4,
               ),
               children: [
                 TextSpan(text: 'terms_agreement'.tr.split('Terms of Service')[0]),
                 TextSpan(
                   text: 'terms_of_service'.tr,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: AppColors.primaryColor,
                     fontWeight: FontWeight.w600,
                     decoration: TextDecoration.underline,
@@ -80,7 +83,7 @@ class TermsCheckbox extends StatelessWidget {
                 const TextSpan(text: ' and '),
                 TextSpan(
                   text: 'privacy_policy'.tr,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: AppColors.primaryColor,
                     fontWeight: FontWeight.w600,
                     decoration: TextDecoration.underline,

@@ -21,7 +21,12 @@ class PhoneInputField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+    // ✅ Cache theme values at build start
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
+    // Pre-calculate colors for performance
+    final textPrimaryColor = isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,7 +34,7 @@ class PhoneInputField extends StatelessWidget {
         Text(
           label,
           style: AppTextStyles.labelLarge.copyWith(
-            color: isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
+            color: textPrimaryColor,
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -39,12 +44,12 @@ class PhoneInputField extends StatelessWidget {
           keyboardType: TextInputType.phone,
           onSaved: onSaved,
           style: AppTextStyles.bodyLarge.copyWith(
-            color: isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
+            color: textPrimaryColor,
           ),
           decoration: InputDecoration(
             hintText: placeholder,
-            suffixIcon: Padding(
-              padding: const EdgeInsets.only(right: 12),
+            suffixIcon: const Padding(
+              padding: EdgeInsets.only(right: 12),
               child: Center(
                 widthFactor: 1,
                 child: Icon(

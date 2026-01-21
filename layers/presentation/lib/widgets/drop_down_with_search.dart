@@ -90,8 +90,11 @@ class _DropdownWithSearchDialogState extends State<DropdownWithSearchDialog> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+    // ✅ Cache theme values at build start
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
 
+    // Pre-calculate colors for performance
     final effectiveBackgroundColor = widget.backgroundColor ??
         (isDark ? AppColors.surfaceDark : AppColors.surfaceLight);
     final effectiveBorderColor = widget.borderColor ?? AppColors.primaryColor;
@@ -99,6 +102,7 @@ class _DropdownWithSearchDialogState extends State<DropdownWithSearchDialog> {
         (isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight);
     final effectiveIconColor = widget.iconColor ?? AppColors.primaryColor;
     final effectivePrefixIconColor = widget.prefixIconColor ?? AppColors.primaryColor;
+    final hintColor = effectiveTextColor.withValues(alpha: 0.6);
 
     return FormBuilderTextField(
       name: widget.name,
@@ -127,7 +131,7 @@ class _DropdownWithSearchDialogState extends State<DropdownWithSearchDialog> {
             hintText: widget.hint,
             hintStyle: widget.textStyle ??
                 AppTextStyles.bodyMedium.copyWith(
-                  color: effectiveTextColor.withValues(alpha: 0.6),
+                  color: hintColor,
                   fontWeight: FontWeight.w500,
                 ),
             filled: true,

@@ -3,6 +3,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
 import 'package:presentation/auth/signup/signup_state_handler.dart';
+import 'package:presentation/routes/routes.dart';
 import 'package:presentation/theme/app_colors.dart';
 import 'package:presentation/theme/app_text_styles.dart';
 import 'package:presentation/widgets/custom_text_field.dart';
@@ -29,31 +30,37 @@ class SignupScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+    // ✅ Cache theme values at build start
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
+    // Pre-calculate colors for performance
+    final backgroundColor = isDark ? AppColors.backgroundDark : AppColors.backgroundLight;
+    final textPrimaryColor = isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight;
+    final textSecondaryColor = isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight;
+
     final controller = Get.put(GetIt.I<SignupController>());
     observeSignupEvents(controller.event);
+
     return GetBuilder<SignupController>(
       init: controller,
       builder: (controller) {
         return Scaffold(
-          backgroundColor: isDark
-              ? AppColors.backgroundDark
-              : AppColors.backgroundLight,
+          backgroundColor: backgroundColor,
           appBar: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,
             leading: IconButton(
               icon: Icon(
                 Icons.arrow_back,
-                color: isDark
-                    ? AppColors.textPrimaryDark
-                    : AppColors.textPrimaryLight,
+                color: textPrimaryColor,
               ),
               onPressed: () => Get.back(),
             ),
           ),
           body: SafeArea(
             child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24.0),
                 child: Column(
@@ -65,9 +72,7 @@ class SignupScreen extends StatelessWidget {
                     Text(
                       'signup_title'.tr,
                       style: AppTextStyles.headlineLarge.copyWith(
-                        color: isDark
-                            ? AppColors.textPrimaryDark
-                            : AppColors.textPrimaryLight,
+                        color: textPrimaryColor,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
@@ -76,9 +81,7 @@ class SignupScreen extends StatelessWidget {
                     Text(
                       'signup_subtitle'.tr,
                       style: AppTextStyles.bodyMedium.copyWith(
-                        color: isDark
-                            ? AppColors.textSecondaryDark
-                            : AppColors.textSecondaryLight,
+                        color: textSecondaryColor,
                       ),
                     ),
                     const SizedBox(height: 32),
@@ -286,41 +289,35 @@ class SignupScreen extends StatelessWidget {
                     const SocialLoginSection(),
                     const SizedBox(height: 32),
 
-                    // Already have account
+                    // Already have account - ✅ Replace RichText with Row
                     Center(
-                      child: RichText(
-                        text: TextSpan(
-                          style: AppTextStyles.bodyMedium.copyWith(
-                            color: isDark
-                                ? AppColors.textSecondaryDark
-                                : AppColors.textSecondaryLight,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            'already_have_account_login'.tr,
+                            style: AppTextStyles.bodyMedium.copyWith(
+                              color: textSecondaryColor,
+                            ),
                           ),
-                          children: [
-                            TextSpan(text: 'already_have_account_login'.tr),
-                            const TextSpan(text: ' '),
-                            WidgetSpan(
-                              child: GestureDetector(
-                                onTap: () {
-                                  // TODO: Navigate to login screen
-                                  Get.snackbar(
-                                    'Coming Soon',
-                                    'Login screen will be available soon',
-                                    snackPosition: SnackPosition.BOTTOM,
-                                  );
-                                },
-                                child: Text(
-                                  'log_in'.tr,
-                                  style: AppTextStyles.bodyMedium.copyWith(
-                                    color: AppColors.primaryColor,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                ),
+                          const SizedBox(width: 4),
+                          GestureDetector(
+                            onTap: () {
+                              // Navigate to login screen using offNamed to replace route
+                              Get.offNamed(loginRouteName);
+                            },
+                            child: Text(
+                              'log_in'.tr,
+                              style: AppTextStyles.bodyMedium.copyWith(
+                                color: AppColors.primaryColor,
+                                fontWeight: FontWeight.w700,
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    ),
+                      ),
                     const SizedBox(height: 32),
                   ],
                 ),

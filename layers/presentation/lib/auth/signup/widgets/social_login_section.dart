@@ -9,7 +9,15 @@ class SocialLoginSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+    // ✅ Cache theme values at build start
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
+    // Pre-calculate colors for performance
+    final dividerColor = isDark ? AppColors.dividerDark : AppColors.dividerLight;
+    final textSecondaryColor = isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight;
+    final textPrimaryColor = isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight;
+    final surfaceColor = isDark ? AppColors.surfaceDark : Colors.white;
 
     return Column(
       children: [
@@ -18,7 +26,7 @@ class SocialLoginSection extends StatelessWidget {
           children: [
             Expanded(
               child: Divider(
-                color: isDark ? AppColors.dividerDark : AppColors.dividerLight,
+                color: dividerColor,
                 thickness: 1,
               ),
             ),
@@ -27,15 +35,13 @@ class SocialLoginSection extends StatelessWidget {
               child: Text(
                 'or_continue_with'.tr,
                 style: AppTextStyles.bodySmall.copyWith(
-                  color: isDark
-                      ? AppColors.textSecondaryDark
-                      : AppColors.textSecondaryLight,
+                  color: textSecondaryColor,
                 ),
               ),
             ),
             Expanded(
               child: Divider(
-                color: isDark ? AppColors.dividerDark : AppColors.dividerLight,
+                color: dividerColor,
                 thickness: 1,
               ),
             ),
@@ -51,6 +57,9 @@ class SocialLoginSection extends StatelessWidget {
                 label: 'google_button'.tr,
                 icon: Icons.g_mobiledata,
                 iconColor: const Color(0xFFDB4437),
+                textColor: textPrimaryColor,
+                surfaceColor: surfaceColor,
+                borderColor: dividerColor,
                 onPressed: () {
                   Get.snackbar(
                     'Coming Soon',
@@ -66,6 +75,9 @@ class SocialLoginSection extends StatelessWidget {
                 label: 'facebook_button'.tr,
                 icon: Icons.facebook,
                 iconColor: const Color(0xFF1877F2),
+                textColor: textPrimaryColor,
+                surfaceColor: surfaceColor,
+                borderColor: dividerColor,
                 onPressed: () {
                   Get.snackbar(
                     'Coming Soon',
@@ -86,26 +98,30 @@ class _SocialButton extends StatelessWidget {
   final String label;
   final IconData icon;
   final Color iconColor;
+  final Color textColor;
+  final Color surfaceColor;
+  final Color borderColor;
   final VoidCallback onPressed;
 
   const _SocialButton({
     required this.label,
     required this.icon,
     required this.iconColor,
+    required this.textColor,
+    required this.surfaceColor,
+    required this.borderColor,
     required this.onPressed,
   });
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
     return OutlinedButton(
       onPressed: onPressed,
       style: OutlinedButton.styleFrom(
         padding: const EdgeInsets.symmetric(vertical: 14),
-        backgroundColor: isDark ? AppColors.surfaceDark : Colors.white,
+        backgroundColor: surfaceColor,
         side: BorderSide(
-          color: isDark ? AppColors.dividerDark : AppColors.dividerLight,
+          color: borderColor,
         ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
@@ -123,9 +139,7 @@ class _SocialButton extends StatelessWidget {
           Text(
             label,
             style: AppTextStyles.labelMedium.copyWith(
-              color: isDark
-                  ? AppColors.textPrimaryDark
-                  : AppColors.textPrimaryLight,
+              color: textColor,
               fontWeight: FontWeight.w500,
             ),
           ),

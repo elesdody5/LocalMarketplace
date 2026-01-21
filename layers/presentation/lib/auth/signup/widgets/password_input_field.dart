@@ -49,7 +49,15 @@ class _PasswordInputFieldState extends State<PasswordInputField> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+    // ✅ Cache theme values at build start
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
+    // Pre-calculate colors for performance
+    final textPrimaryColor = isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight;
+    final textSecondaryColor = isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight;
+    final surfaceColor = isDark ? AppColors.surfaceDark : AppColors.surfaceLight;
+    final hintColor = textSecondaryColor.withValues(alpha: 0.6);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,9 +65,7 @@ class _PasswordInputFieldState extends State<PasswordInputField> {
         Text(
           widget.label,
           style: AppTextStyles.labelLarge.copyWith(
-            color: isDark
-                ? AppColors.textPrimaryDark
-                : AppColors.textPrimaryLight,
+            color: textPrimaryColor,
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -76,28 +82,22 @@ class _PasswordInputFieldState extends State<PasswordInputField> {
           onSaved: widget.onSaved,
           validator: widget.validator,
           style: AppTextStyles.bodyLarge.copyWith(
-            color: isDark
-                ? AppColors.textPrimaryDark
-                : AppColors.textPrimaryLight,
+            color: textPrimaryColor,
             fontWeight: FontWeight.w500,
           ),
           decoration: InputDecoration(
             hintText: widget.placeholder,
             hintStyle: AppTextStyles.bodyLarge.copyWith(
-              color:
-                  (isDark
-                          ? AppColors.textSecondaryDark
-                          : AppColors.textSecondaryLight)
-                      .withValues(alpha: 0.6),
+              color: hintColor,
               fontWeight: FontWeight.w400,
             ),
             filled: true,
-            fillColor: isDark ? AppColors.surfaceDark : AppColors.surfaceLight,
+            fillColor: surfaceColor,
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 16,
               vertical: 16,
             ),
-            prefixIcon: Icon(
+            prefixIcon: const Icon(
               Icons.lock_outline,
               color: AppColors.primaryColor,
               size: 20,

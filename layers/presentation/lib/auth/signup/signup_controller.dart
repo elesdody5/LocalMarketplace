@@ -64,8 +64,10 @@ class SignupController extends GetxController {
   Future<void> signupAction(SignedUpAction action) async {
     if (action is SaveUserData) {
       _state = _state.copyWith(user: action.user);
-      update();
-    } else if (action is Signup) {
+    } else if (action is UpdatePassword) {
+      _state = _state.copyWith(password: action.password);
+    }
+    else if (action is Signup) {
       await handleSignup();
     }
   }
@@ -78,9 +80,12 @@ class SignupController extends GetxController {
 
   Future<void> handleSignup() async {
     try {
+      if(_state.password == null || _state.password!.isEmpty) {
+        return;
+      }
       _state = _state.copyWith(isLoading: true);
       update();
-      await signupUseCase.call(_state.user);
+      await signupUseCase.call(_state.user, _state.password!);
       _state = _state.copyWith(isLoading: false);
       update();
       event.value = SignupSuccessEvent();
