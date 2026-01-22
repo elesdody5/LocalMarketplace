@@ -78,4 +78,19 @@ Map<String, String> enJson = {
   'language_updated_message': 'App language has been updated successfully',
   'error': 'Error',
   'failed_to_update_language': 'Failed to update language',
+
+  // Verification Screen
+  'verification_title': 'Enter Verification Code',
+  'verification_subtitle': 'Please enter the 6-digit code sent to',
+  'secure_badge': 'Secure',
+  'resend_code': 'Resend Code',
+  'resend_in': 'Resend in',
+  'verify_button': 'Verify',
+  'didnt_receive_code': "Didn't receive the code?",
+  'verify_via_email': 'Verify via Email instead',
+  'error_code_incomplete': 'Please enter all 6 digits',
+  'error_code_invalid': 'Invalid verification code',
+  'verification_success': 'Verification successful!',
+  'code_resent_success': 'Code resent successfully',
+  'success': 'Success',
 };

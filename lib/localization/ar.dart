@@ -72,4 +72,19 @@ Map<String, String> arJson = {
   'error_confirm_password_required': 'الرجاء تأكيد كلمة المرور',
   'error_passwords_dont_match': 'كلمات المرور غير متطابقة',
   'error_email_or_phone_required': 'الرجاء إدخال البريد الإلكتروني أو رقم الهاتف',
+
+  // Verification Screen
+  'verification_title': 'أدخل رمز التحقق',
+  'verification_subtitle': 'الرجاء إدخال الرمز المكون من 6 أرقام المرسل إلى',
+  'secure_badge': 'آمن',
+  'resend_code': 'إعادة إرسال الرمز',
+  'resend_in': 'إعادة الإرسال خلال',
+  'verify_button': 'تحقق',
+  'didnt_receive_code': 'لم تستلم الرمز؟',
+  'verify_via_email': 'التحقق عبر البريد الإلكتروني بدلاً من ذلك',
+  'error_code_incomplete': 'الرجاء إدخال جميع الأرقام الستة',
+  'error_code_invalid': 'رمز التحقق غير صحيح',
+  'verification_success': 'تم التحقق بنجاح!',
+  'code_resent_success': 'تم إعادة إرسال الرمز بنجاح',
+  'success': 'نجاح',
 };

@@ -3,6 +3,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
 import 'package:presentation/auth/signup/signup_state_handler.dart';
+import 'package:presentation/routes/auth_routes.dart';
 import 'package:presentation/routes/routes.dart';
 import 'package:presentation/theme/app_colors.dart';
 import 'package:presentation/theme/app_text_styles.dart';

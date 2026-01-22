@@ -15,6 +15,7 @@ import 'package:injectable/injectable.dart' as _i526;
 import '../auth/auth_repository.dart' as _i778;
 import '../auth/usecase/login_usecase.dart' as _i120;
 import '../auth/usecase/signup_usecase.dart' as _i734;
+import '../auth/usecase/verification_usecase.dart' as _i375;
 import '../user_preferences/use_case/get_user_preferences_usecase.dart'
     as _i679;
 import '../user_preferences/use_case/update_user_preferences.dart' as _i892;
@@ -28,6 +29,7 @@ _i174.GetIt initDomainGetIt(
 }) {
   final gh = _i526.GetItHelper(getIt, environment, environmentFilter);
   gh.factory<_i120.LoginUseCase>(() => _i120.LoginUseCase());
+  gh.factory<_i375.VerificationUseCase>(() => _i375.VerificationUseCase());
   gh.factory<_i734.SignupUseCase>(
     () => _i734.SignupUseCase(gh<_i778.AuthRepository>()),
   );

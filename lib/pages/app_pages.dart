@@ -8,6 +8,8 @@ import 'package:presentation/routes/routes.dart';
 import 'package:presentation/splash/splash_screen.dart';
 import 'package:presentation/welcome/welcome_screen.dart';
 
+import 'auth_pages.dart';
+
 final appPages = [
   GetPage(
     name: splashRouteName,
@@ -25,22 +27,11 @@ final appPages = [
     transition: Transition.cupertino,
     transitionDuration: const Duration(milliseconds: 300),
   ),
-  GetPage(
-    name: signupRouteName,
-    page: () => SignupScreen(),
-    transition: Transition.cupertino,
-    transitionDuration: const Duration(milliseconds: 300),
-  ),
-  GetPage(
-    name: loginRouteName,
-    page: () => LoginScreen(),
-    transition: Transition.cupertino,
-    transitionDuration: const Duration(milliseconds: 300),
-  ),
+
   GetPage(
     name: homeRouteName,
     page: () => const HomeScreen(),
     transition: Transition.cupertino,
     transitionDuration: const Duration(milliseconds: 300),
   ),
-];
+] + authPages;

@@ -1,0 +1,27 @@
+import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:get/get_navigation/src/routes/transitions_type.dart';
+import 'package:presentation/auth/login/login_screen.dart';
+import 'package:presentation/auth/signup/signup_screen.dart';
+import 'package:presentation/auth/verification/verification_screen.dart';
+import 'package:presentation/routes/auth_routes.dart';
+
+var authPages = [
+  GetPage(
+    name: signupRouteName,
+    page: () => SignupScreen(),
+    transition: Transition.cupertino,
+    transitionDuration: const Duration(milliseconds: 300),
+  ),
+  GetPage(
+    name: loginRouteName,
+    page: () => LoginScreen(),
+    transition: Transition.cupertino,
+    transitionDuration: const Duration(milliseconds: 300),
+  ),
+  GetPage(
+    name: verificationRouteName,
+    page: () => VerificationScreen(),
+    transition: Transition.cupertino,
+    transitionDuration: const Duration(milliseconds: 300),
+  ),
+];
