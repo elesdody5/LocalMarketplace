@@ -45,3 +45,22 @@ class MockVerificationUseCase extends _i1.Mock
           )
           as _i3.Future<void>);
 }
+
+/// A class which mocks [ResendVerificationCodeUseCase].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockResendVerificationCodeUseCase extends _i1.Mock
+    implements _i2.ResendVerificationCodeUseCase {
+  MockResendVerificationCodeUseCase() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i3.Future<void> call(_i2.VerificationType? type, String? contact) =>
+      (super.noSuchMethod(
+            Invocation.method(#call, [type, contact]),
+            returnValue: _i3.Future<void>.value(),
+            returnValueForMissingStub: _i3.Future<void>.value(),
+          )
+          as _i3.Future<void>);
+}

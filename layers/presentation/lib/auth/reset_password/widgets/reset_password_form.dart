@@ -47,9 +47,21 @@ class _ResetPasswordFormState extends State<ResetPasswordForm> {
               SaveNewPassword(value ?? ''),
             ),
             validator: (value) {
-              final v = value ?? '';
-              if (v.isEmpty) return 'error_required'.tr;
-              if (v.length < 8) return 'error_password_min_length'.tr;
+              if (value == null || value.isEmpty) {
+                return 'error_password_invalid'.tr;
+              }
+              // Check all validation rules
+              final hasMinLength = value.length >= 8;
+              final hasLowercase = value.contains(RegExp(r'[a-z]'));
+              final hasUppercase = value.contains(RegExp(r'[A-Z]'));
+              final hasDigit = value.contains(RegExp(r'[0-9]'));
+
+              if (!hasMinLength ||
+                  !hasLowercase ||
+                  !hasUppercase ||
+                  !hasDigit) {
+                return 'error_password_invalid'.tr;
+              }
               return null;
             },
             decoration: InputDecoration(
@@ -78,8 +90,8 @@ class _ResetPasswordFormState extends State<ResetPasswordForm> {
               if (v.isEmpty) return 'error_required'.tr;
               final newPassword =
                   widget.formKey.currentState?.fields['newPassword']?.value
-                          as String? ??
-                      '';
+                      as String? ??
+                  '';
               if (newPassword.isNotEmpty && v != newPassword) {
                 return 'error_passwords_do_not_match'.tr;
               }

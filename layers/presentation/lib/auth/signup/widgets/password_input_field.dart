@@ -54,9 +54,15 @@ class _PasswordInputFieldState extends State<PasswordInputField> {
     final isDark = theme.brightness == Brightness.dark;
 
     // Pre-calculate colors for performance
-    final textPrimaryColor = isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight;
-    final textSecondaryColor = isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight;
-    final surfaceColor = isDark ? AppColors.surfaceDark : AppColors.surfaceLight;
+    final textPrimaryColor = isDark
+        ? AppColors.textPrimaryDark
+        : AppColors.textPrimaryLight;
+    final textSecondaryColor = isDark
+        ? AppColors.textSecondaryDark
+        : AppColors.textSecondaryLight;
+    final surfaceColor = isDark
+        ? AppColors.surfaceDark
+        : AppColors.surfaceLight;
     final hintColor = textSecondaryColor.withValues(alpha: 0.6);
 
     return Column(
@@ -112,7 +118,7 @@ class _PasswordInputFieldState extends State<PasswordInputField> {
               ),
               onPressed: _togglePasswordVisibility,
             ),
-
+            errorMaxLines: 3,
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
               borderSide: const BorderSide(color: AppColors.error, width: 1),

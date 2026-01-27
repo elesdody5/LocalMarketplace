@@ -11,9 +11,10 @@ import 'package:presentation/routes/auth_routes.dart';
 
 import 'verification_controller_test.mocks.dart';
 
-@GenerateMocks([VerificationUseCase])
+@GenerateMocks([VerificationUseCase, ResendVerificationCodeUseCase])
 void main() {
   late MockVerificationUseCase mockVerificationUseCase;
+  late MockResendVerificationCodeUseCase mockResendVerificationCodeUseCase;
   late VerificationController controller;
 
   const testPhoneNumber = '+1234567890';
@@ -24,7 +25,8 @@ void main() {
     Get.testMode = true;
 
     mockVerificationUseCase = MockVerificationUseCase();
-    controller = VerificationController(mockVerificationUseCase);
+    mockResendVerificationCodeUseCase = MockResendVerificationCodeUseCase();
+    controller = VerificationController(mockVerificationUseCase, mockResendVerificationCodeUseCase);
   });
 
   tearDown(() {
@@ -178,7 +180,7 @@ void main() {
         // Wait for countdown to complete (or force enable)
         controller.verificationAction(UpdateResendCountdown(0));
 
-        when(mockVerificationUseCase.resendCode(any, any))
+        when(mockResendVerificationCodeUseCase(any,any))
             .thenAnswer((_) async => Future.value());
 
         controller.verificationAction(ResendCode());
@@ -187,7 +189,7 @@ void main() {
         await Future.delayed(const Duration(milliseconds: 100));
 
         expect(controller.event.value, isA<ResendSuccessEvent>());
-        verify(mockVerificationUseCase.resendCode(
+        verify(mockResendVerificationCodeUseCase(
           VerificationType.phone,
           testPhoneNumber,
         )).called(1);
@@ -204,14 +206,14 @@ void main() {
         // Wait for async operation
         await Future.delayed(const Duration(milliseconds: 100));
 
-        verifyNever(mockVerificationUseCase.resendCode(any, any));
+        verifyNever(mockResendVerificationCodeUseCase(any,any));
       });
 
       test('should reset countdown after successful resend', () async {
         controller.onInit();
         controller.verificationAction(UpdateResendCountdown(0));
 
-        when(mockVerificationUseCase.resendCode(any, any))
+        when(mockResendVerificationCodeUseCase(any,any))
             .thenAnswer((_) async => Future.value());
 
         controller.verificationAction(ResendCode());
@@ -287,7 +289,7 @@ void main() {
       });
 
       test('should handle empty arguments gracefully', () {
-        final testController = VerificationController(mockVerificationUseCase);
+        final testController = VerificationController(mockVerificationUseCase, mockResendVerificationCodeUseCase);
         // Don't set any values - state should have empty defaults
 
         expect(testController.state.phoneNumber, '');
@@ -297,7 +299,7 @@ void main() {
       });
 
       test('should handle missing phone in arguments', () {
-        final testController = VerificationController(mockVerificationUseCase);
+        final testController = VerificationController(mockVerificationUseCase, mockResendVerificationCodeUseCase);
         testController.setEmail(testEmail);
         // Don't set phone - it should remain empty
 
@@ -307,7 +309,7 @@ void main() {
       });
 
       test('should handle missing email in arguments', () {
-        final testController = VerificationController(mockVerificationUseCase);
+        final testController = VerificationController(mockVerificationUseCase, mockResendVerificationCodeUseCase);
         testController.setPhoneNumber(testPhoneNumber);
         // Don't set email - it should remain empty
 
@@ -415,7 +417,7 @@ void main() {
         controller.verificationAction(SwitchVerificationType());
         controller.verificationAction(UpdateResendCountdown(0));
 
-        when(mockVerificationUseCase.resendCode(any, any))
+        when(mockResendVerificationCodeUseCase(any,any))
             .thenAnswer((_) async => Future.value());
 
         controller.verificationAction(ResendCode());
@@ -423,7 +425,7 @@ void main() {
         await Future.delayed(const Duration(milliseconds: 100));
 
         expect(controller.event.value, isA<ResendSuccessEvent>());
-        verify(mockVerificationUseCase.resendCode(
+        verify(mockResendVerificationCodeUseCase(
           VerificationType.email,
           testEmail,
         )).called(1);
